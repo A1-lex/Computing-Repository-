@@ -42,19 +42,22 @@ jobs:
           pip install -r requirements.txt
 
       - name: Run Migrations
+        working-directory: CRPR
         env:
           DATABASE_URL: postgres://django:django@localhost:5432/test_db
         run: |
           python manage.py migrate
 
       - name: Run Tests
+        working-directory: CRPR
         env:
           DATABASE_URL: postgres://django:django@localhost:5432/test_db
-          DJANGO_SETTINGS_MODULE: your_project_name.settings
+          DJANGO_SETTINGS_MODULE: CRPR.settings
         run: |
           python manage.py test
 
       - name: Check for Security Vulnerabilities
+        working-directory: CRPR
         run: |
           pip install bandit
           bandit -r .
